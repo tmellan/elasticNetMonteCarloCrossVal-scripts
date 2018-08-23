@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* ::Subsubsection:: *)
-(*Elastic net intial parameters*)
+(*Elastic net initial parameters*)
 
 
 (* ::Text:: *)
@@ -13,7 +13,7 @@
 
 (* ::Input:: *)
 (*(*Set dir and import data*)*)
-(*dirData="/Users/thomasmellan/Downloads/numerai_datasets"*)
+(*dirData="~/Downloads/numerai_datasets";*)
 (*trainingData=Import[StringJoin[dirData,"/numerai_training_data.csv"]];*)
 (**)
 (*(*Global parameters*)*)
@@ -58,23 +58,3 @@
 (*Export[StringJoin[dir,"/pNet.pdf"],pNet]*)
 (*Export[StringJoin[dir,"/minConfigValue.txt"],minConfigValue]*)
 (*Export[StringJoin[dir,"/mminConfigFunction.txt"],minConfigFunction]*)
-
-
-(* ::Input:: *)
-(**)
-
-
-(* ::Input:: *)
-(**)
-
-
-(* ::Input:: *)
-(**)
-
-
-(* ::Input:: *)
-(**)
-
-
-(* ::Input:: *)
-(**)
