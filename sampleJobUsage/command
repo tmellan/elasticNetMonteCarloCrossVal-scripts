@@ -1,0 +1,1 @@
+math -script ../1-elasticNet-crossVal-initialparameters.m > job1.out ; cat job1.out

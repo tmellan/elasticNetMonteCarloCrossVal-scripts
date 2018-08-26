@@ -1,0 +1,40 @@
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |     2.7s      |         80/100         |  LogisticRegression  |       0.548       |     0.678     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.659s     |         80/100         |  LogisticRegression  |       0.524       |     0.746     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.685s     |         80/100         |  LogisticRegression  |       0.524       |     0.696     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.684s     |         80/100         |  LogisticRegression  |       0.600       |     0.688     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.668s     |         80/100         |  LogisticRegression  |       0.451       |     0.691     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.619s     |         80/100         |  LogisticRegression  |       0.488       |     0.705     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.619s     |         80/100         |  LogisticRegression  |       0.500       |     0.692     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.635s     |         80/100         |  LogisticRegression  |       0.595       |     0.690     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |     0.62s     |         80/100         |  LogisticRegression  |       0.548       |     0.693     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.651s     |         80/100         |  LogisticRegression  |       0.500       |     0.704     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.629s     |         80/100         |  LogisticRegression  |       0.500       |     0.678     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.688s     |         80/100         |  LogisticRegression  |       0.500       |     0.698     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.636s     |         80/100         |  LogisticRegression  |       0.667       |     0.687     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.666s     |         80/100         |  LogisticRegression  |       0.552       |     0.690     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.631s     |         80/100         |  LogisticRegression  |       0.403       |     0.701     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.684s     |         80/100         |  LogisticRegression  |       0.524       |     0.699     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |     0.65s     |         80/100         |  LogisticRegression  |       0.471       |     0.703     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.667s     |         80/100         |  LogisticRegression  |       0.451       |     0.759     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.649s     |         80/100         |  LogisticRegression  |       0.524       |     0.693     | 
+ | Time elapsed: | Training example used: | Current best method: | Current accuracy: | Current loss: | 
+ |    0.685s     |         80/100         |  LogisticRegression  |       0.549       |     0.690     | 
