@@ -8,6 +8,12 @@ echo $PATH
 echo "As necessary:"
 echo "mkdir -p Jobs"
 echo "chmod 755 *.sh *.m"
+
+echo "cd $HOME/Downloads"
+echo "pip install --user numerapi"
+echo "numerapi  download_data"
+echo "dataDir=$HOME/numerai_dataset_122"
+
 echo "alias mathematica='/Applications/Mathematica.app/Contents/MacOS/MathKernel'"
 echo "alias math="mathematica""
 echo "cd sampleJobUsage ; math -script ../directoryTest.m"
