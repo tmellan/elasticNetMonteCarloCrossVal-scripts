@@ -48,7 +48,7 @@ fullTrainingSetDataOnly=(#[[1]]&/@fullTrainingSet);
 (*Test parameters = 2 10 10 5 2 5*)
 (*Reasonable parameters 10 500 1000 10 1 25*)
 boLogistic=With[
-{nFold=2,kSubSamplesT=10,kSubSamplesV=10,mErasT=10,mErasV=2,gaussianResolution=10},
+{nFold=10,kSubSamplesT=100,kSubSamplesV=50,mErasT=10,mErasV=2,gaussianResolution=20},
 randomEraSample=Table[RandomSample[Range[eraTotalNumber],mErasT+mErasV],{n,1,nFold}];
 {eraSplitTrain,eraSplitVal}={Table[randomEraSample[[n]][[1;;mErasT]],{n,1,nFold}],Table[randomEraSample[[n]][[mErasT+1;;mErasT+mErasV]],{n,1,nFold}]};
 {eraSplitSubsampleIndexTrain,eraSplitSubsampleIndexVal}={Table[Table[RandomSample[Range[eraLengths[[eraSplitTrain[[n]][[split]]]]],kSubSamplesT],{split,1,mErasT}],{n,1,nFold}],Table[Table[RandomSample[Range[eraLengths[[eraSplitVal[[n]][[split]]]]],kSubSamplesV],{split,1,mErasV}],{n,1,nFold}]};
@@ -73,6 +73,8 @@ Export[StringJoin[dir,"/pNet.pdf"],pNet];
 Export[StringJoin[dir,"/minConfigValue.txt"],minConfigValue];
 Export[StringJoin[dir,"/minConfigFunction.txt"],minConfigFunction];
 Export[StringJoin[dir,"/pNetTable.txt"],pNetTable];
+
+Exit[]
 
 
 
