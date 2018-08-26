@@ -21,7 +21,7 @@
 
 (* ::Input::Initialization:: *)
 (*Set dir and import data*)
-dirData="~/Downloads/numerai_datasets";
+dirData="~/Downloads/numerai_dataset_122";
 trainingData=Import[StringJoin[dirData,"/numerai_training_data.csv"]];
 
 (*If running as a script set dir as*)
