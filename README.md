@@ -2,6 +2,8 @@
 
 Elastic net with L1 and L2 regularisation parameters determined using Monte Carlo crossvalidation and Gaussian process fitted to logloss parameterrs.
 
+./elasticNet.sh > job.out & disown -a && exit
+
 Contents:
 * Setup -- init.sh
 * Bash wrapper for mathematic elastic net package (.m file) -- elasticNet.sh
