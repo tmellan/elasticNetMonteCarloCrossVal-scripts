@@ -20,25 +20,31 @@
 
 
 (* ::Input::Initialization:: *)
+
+Print["Importing data"]
 (*Set dir and import data*)
 dirData="~/Downloads/numerai_dataset_122";
 trainingData=Import[StringJoin[dirData,"/numerai_training_data.csv"]];
 
+Print["Setting job dir"]
 (*If running as a script set dir as*)
 dir=StringJoin[ToString@DirectoryName[$InputFileName],"/sampleJobUsage"];
 SetDirectory[dir];
 
+Print["Setting global parameters"]
 (*Global parameters*)
 eraTotalNumber=120; (*Numer of eras in training data. This should be automatic in case it changes*)
-RegSize=4 ;(*L1 L2 regularisation domain size (square)*)
+RegSize=6 ;(*L1 L2 regularisation domain size (square)*)
 intialRegParameters={1,1}; (*Initial L1=L2=1*)
 
+Print["Getting era information"]
 (*Get number of points in each era*)
 eraLabels=Table[StringJoin["era",ToString@i],{i,1,eraTotalNumber}];
 erasNames=Transpose[trainingData][[2]];
 eraLengths=Table[Cases[erasNames,eraLabels[[i]]]//Length,{i,1,Length@eraLabels}];
 eraLengthsCumulative=Join[{0},Table[Total@eraLengths[[1;;i]],{i,1,Length@eraLengths}]];
 
+Print["Splitting data era-wise"]
 (*Split data era-wise*)
 fullTrainingSet=(Join[{StringDelete[#[[2]],"era"]},#[[4;;-6]]]->#[[-5;;-5]][[1]])&/@trainingData[[2;;-1]];
 fullTrainingSplit=Table[fullTrainingSet[[eraLengthsCumulative[[era]]+1;;eraLengthsCumulative[[era+1]]]],{era,1,Length@eraLabels}];
@@ -47,8 +53,9 @@ fullTrainingSetDataOnly=(#[[1]]&/@fullTrainingSet);
 (*Elastic net parameters determined by Monte Carlo cross validation, and a Gaussian process fitted to the log loss in L1-L2 parameter space*)
 (*Test parameters = 2 10 10 5 2 5*)
 (*Reasonable parameters 10 500 1000 10 1 25*)
+Print["Starting cross-validation"]
 boLogistic=With[
-{nFold=10,kSubSamplesT=1000,kSubSamplesV=1000,mErasT=50,mErasV=10,gaussianResolution=25},
+{nFold=10,kSubSamplesT=1000,kSubSamplesV=1000,mErasT=50,mErasV=5,gaussianResolution=36},
 randomEraSample=Table[RandomSample[Range[eraTotalNumber],mErasT+mErasV],{n,1,nFold}];
 {eraSplitTrain,eraSplitVal}={Table[randomEraSample[[n]][[1;;mErasT]],{n,1,nFold}],Table[randomEraSample[[n]][[mErasT+1;;mErasT+mErasV]],{n,1,nFold}]};
 {eraSplitSubsampleIndexTrain,eraSplitSubsampleIndexVal}={Table[Table[RandomSample[Range[eraLengths[[eraSplitTrain[[n]][[split]]]]],kSubSamplesT],{split,1,mErasT}],{n,1,nFold}],Table[Table[RandomSample[Range[eraLengths[[eraSplitVal[[n]][[split]]]]],kSubSamplesV],{split,1,mErasV}],{n,1,nFold}]};
@@ -61,6 +68,7 @@ regSpace[init_,size_]:=Rectangle[{init[[1]]-size,init[[2]]-size},{init[[1]]+size
 BayesianMinimization[lossOptimiserFunction,regSpace[intialRegParameters,RegSize],MaxIterations->gaussianResolution,AssumeDeterministic->False]
 ]
 
+Print[Cross-validatiobn finished, making predictor function]
 (*Get best log-loss actually calculated, and best log-loss from Gaussian process over log-loss, and plot of logloss surface*)
 pLogistic=boLogistic["PredictorFunction"]
 minConfigValue=Append[boLogistic["MinimumConfiguration"], boLogistic["MinimumValue"]]
@@ -69,11 +77,14 @@ pNet=Plot3D[pLogistic[{x,y}],{x,intialRegParameters[[1]]-RegSize,intialRegParame
 pNetTable=Table[pLogistic[{x,y}],{x,intialRegParameters[[1]]-RegSize,intialRegParameters[[1]]+RegSize},{y,intialRegParameters[[2]]-RegSize,intialRegParameters[[2]]+RegSize}]
 
 (*Export image of L1-L2 logloss surface, and L1-L2 values with best logloss*)
+Print["Exporting"]
 Export[StringJoin[dir,"/pNet.pdf"],pNet];
 Export[StringJoin[dir,"/minConfigValue.txt"],minConfigValue];
 Export[StringJoin[dir,"/minConfigFunction.txt"],minConfigFunction];
 Export[StringJoin[dir,"/pNetTable.txt"],pNetTable];
 
+Print["Exiting"]
+CloseKernels[]
 Exit[]
 
 

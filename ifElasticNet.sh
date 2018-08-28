@@ -4,10 +4,11 @@
 module load mathematica
 
 dir=`pwd`
-jName="L1-L2"
+jName="if-L1-L2"
 
 cd $dir; mkdir -p Jobs
 
+c=0
 for i in {1..5}; do 
 
   cd $dir/Jobs ; mkdir -p $i'-'$jName
@@ -24,8 +25,12 @@ for i in {1..5}; do
   echo 'r'$i'-elasticNet-crossVal-initialparameters.m'
   echo "script submitted"
   wolfram -script ../'r'$i'-elasticNet-crossVal-initialparameters.m' > $i'-'$jName.out &
-  wait
-  sleep 5m
+
+  let c=c+1
+  if (( $c % 3 == 0 )); then wait; fi
+  
+#  wait
+#  sleep 5m
 
   cd $dir
 done
