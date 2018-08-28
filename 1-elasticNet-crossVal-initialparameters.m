@@ -55,7 +55,7 @@ fullTrainingSetDataOnly=(#[[1]]&/@fullTrainingSet);
 (*Reasonable parameters 10 500 1000 10 1 25*)
 Print["Starting cross-validation"]
 boLogistic=With[
-{nFold=10,kSubSamplesT=1000,kSubSamplesV=1000,mErasT=50,mErasV=5,gaussianResolution=36},
+{nFold=10,kSubSamplesT=1000,kSubSamplesV=1000,mErasT=25,mErasV=1,gaussianResolution=25},
 randomEraSample=Table[RandomSample[Range[eraTotalNumber],mErasT+mErasV],{n,1,nFold}];
 {eraSplitTrain,eraSplitVal}={Table[randomEraSample[[n]][[1;;mErasT]],{n,1,nFold}],Table[randomEraSample[[n]][[mErasT+1;;mErasT+mErasV]],{n,1,nFold}]};
 {eraSplitSubsampleIndexTrain,eraSplitSubsampleIndexVal}={Table[Table[RandomSample[Range[eraLengths[[eraSplitTrain[[n]][[split]]]]],kSubSamplesT],{split,1,mErasT}],{n,1,nFold}],Table[Table[RandomSample[Range[eraLengths[[eraSplitVal[[n]][[split]]]]],kSubSamplesV],{split,1,mErasV}],{n,1,nFold}]};
@@ -83,9 +83,8 @@ Export[StringJoin[dir,"/minConfigValue.txt"],minConfigValue];
 Export[StringJoin[dir,"/minConfigFunction.txt"],minConfigFunction];
 Export[StringJoin[dir,"/pNetTable.txt"],pNetTable];
 
+(*Something wrong with the last paraqllel execution in linux, hence pause etc*)
 Print["Exiting"]
 CloseKernels[]
-Exit[]
-
-
+Pause[60]
 
