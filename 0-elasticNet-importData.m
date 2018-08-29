@@ -25,7 +25,7 @@ dirData="~/Downloads/numerai_dataset_122";
 trainingData=Import[StringJoin[dirData,"/numerai_training_data.csv"]]
 
 (*Export in efficient format*)
-dirMXimport=StringJoin[ToString@DirectoryName[$InputFileName]]
+dirMXimport=StringJoin[ToString@DirectoryName[$InputFileName],"/Jobs"]
 DumpSave[StringJoin[dirMXimport,"/trainingData.mx"],trainingData]
 
 (*Get back*)
@@ -33,3 +33,6 @@ DumpSave[StringJoin[dirMXimport,"/trainingData.mx"],trainingData]
 Clear[trainingData]
 Get[StringJoin[dirMXimport,"/trainingData.mx"]]
 *)
+
+CloseKernels[]
+Pause[15]

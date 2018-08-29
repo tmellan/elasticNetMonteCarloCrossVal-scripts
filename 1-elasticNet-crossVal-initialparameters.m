@@ -55,7 +55,7 @@ Print["Starting cross-validation"]
 (*Test parameters = 2 10 10 5 2 5*)
 (*Reasonable parameters 10 500 1000 10 1 25*)
 boLogistic=With[
-{nFold=10,kSubSamplesT=1000,kSubSamplesV=1000,mErasT=25,mErasV=1,gaussianResolution=25},
+{nFold=10,kSubSamplesT=1500,kSubSamplesV=1500,mErasT=50,mErasV=5,gaussianResolution=36},
 randomEraSample=Table[RandomSample[Range[eraTotalNumber],mErasT+mErasV],{n,1,nFold}];
 {eraSplitTrain,eraSplitVal}={Table[randomEraSample[[n]][[1;;mErasT]],{n,1,nFold}],Table[randomEraSample[[n]][[mErasT+1;;mErasT+mErasV]],{n,1,nFold}]};
 {eraSplitSubsampleIndexTrain,eraSplitSubsampleIndexVal}={Table[Table[RandomSample[Range[eraLengths[[eraSplitTrain[[n]][[split]]]]],kSubSamplesT],{split,1,mErasT}],{n,1,nFold}],Table[Table[RandomSample[Range[eraLengths[[eraSplitVal[[n]][[split]]]]],kSubSamplesV],{split,1,mErasV}],{n,1,nFold}]};
@@ -68,20 +68,25 @@ regSpace[init_,size_]:=Rectangle[{init[[1]]-size,init[[2]]-size},{init[[1]]+size
 BayesianMinimization[lossOptimiserFunction,regSpace[intialRegParameters,RegSize],MaxIterations->gaussianResolution,AssumeDeterministic->False]
 ]
 
+Pause[60]
 Print["Cross-validation finished, making predictor function, and getting output data"]
 (*Get best log-loss actually calculated, and best log-loss from Gaussian process over log-loss, and plot of logloss surface*)
 pLogistic=boLogistic["PredictorFunction"]
 minConfigValue=Append[boLogistic["MinimumConfiguration"], boLogistic["MinimumValue"]]
 minConfigFunction=Quiet@FindArgMin[pLogistic[{x,y}],{{x},{y}}]
 pNet=Plot3D[pLogistic[{x,y}],{x,intialRegParameters[[1]]-RegSize,intialRegParameters[[1]]+RegSize},{y,intialRegParameters[[2]]-RegSize,intialRegParameters[[2]]+RegSize},PlotRange->All,ImageSize->1000,AxesLabel->{"Logloss","Exp[L1]","Exp[L2]"}]
-pNetTable=Table[pLogistic[{x,y}],{x,intialRegParameters[[1]]-RegSize,intialRegParameters[[1]]+RegSize},{y,intialRegParameters[[2]]-RegSize,intialRegParameters[[2]]+RegSize}]
+pNetTable=Table[{x,y,pLogistic[{x,y}]},{x,intialRegParameters[[1]]-RegSize,intialRegParameters[[1]]+RegSize},{y,intialRegParameters[[2]]-RegSize,intialRegParameters[[2]]+RegSize}]
 
+Pause[60]
 Print["Exporting"]
 (*Export image of L1-L2 logloss surface, and L1-L2 values with best logloss*)
-Export[StringJoin[dir,"/pNet.pdf"],pNet];
 Export[StringJoin[dir,"/minConfigValue.txt"],minConfigValue];
 Export[StringJoin[dir,"/minConfigFunction.txt"],minConfigFunction];
-Export[StringJoin[dir,"/pNetTable.txt"],pNetTable];
+Export[StringJoin[dir,"/pNetTable.txt"],Evaluate[pNetTable//TableForm]];
+
+(*pdf expiort is broken when not logged in to a terminal window*)
+(*Export[StringJoin[dir,"/pNet.pdf"],pNet];*)
+DumpSave[StringJoin[dir,"/pNet.mx"],pNet];
 
 Print["Closing Kernels"]
 (*Problem closing and restarting parallel kernels under linux, hence...*)

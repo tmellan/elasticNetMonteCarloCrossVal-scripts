@@ -1,4 +1,5 @@
-Starting main loop Tue 28 Aug 14:49:56 BST 2018
+Importing and saving mx file training data
+Starting main loop Tue 28 Aug 21:59:59 BST 2018
 r1-elasticNet-crossVal-initialparameters.m
 script submitted
 r2-elasticNet-crossVal-initialparameters.m
@@ -7,7 +8,16 @@ r3-elasticNet-crossVal-initialparameters.m
 script submitted
 r4-elasticNet-crossVal-initialparameters.m
 script submitted
-r5-elasticNeFinished
-l-initialparameters.m
+r5-elasticNet-crossVal-initialparameters.m
 script submitted
-Finishing main loop Tue 28 Aug 14:50:01 BST 2018
+r6-elasticNet-crossVal-initialparameters.m
+script submitted
+r7-elasticNet-crossVal-initialparameters.m
+script submitted
+r8-elasticNet-crossVal-initialparameters.m
+script submitted
+r9-elasticNet-crossVal-initialparameters.m
+script submitted
+r10-elasticNet-crossVal-initialparameters.m
+script submitted
+Finishing main loop Tue 28 Aug 22:00:09 BST 2018
