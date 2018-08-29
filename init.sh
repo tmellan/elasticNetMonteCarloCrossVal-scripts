@@ -1,11 +1,12 @@
 #!/bin/bash
-dir=`pwd`
 
+echo "As necessary:"
+
+dir=`pwd`
 echo $PATH
 path=`echo "PATH=$PATH:"$dir`
 echo $PATH
 
-echo "As necessary:"
 echo "mkdir -p Jobs"
 echo "chmod 755 *.sh *.m"
 

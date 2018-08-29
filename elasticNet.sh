@@ -3,27 +3,22 @@
 #Uncomment if module environment
 module load mathematica
 
-
 dir=`pwd`
 jName="if-L1-L2"
-
-cd $dir; mkdir -p Jobs
-
+runDir="Jobs"
 c=0
-echo `date` >> save_pid.txt
+
+echo `date` >> date_pid.txt
+cd $dir; mkdir -p $runDdir
 
 echo "Importing and saving mx file training data"
 wolfram -script 0-elasticNet-importData.m
 wait
 
-
 echo "Starting main loop" `date`
 for i in {1..10}; do 
-
   let c=c+1
-
   cd $dir/Jobs ; mkdir -p $i'-'$jName
-
   cd $i'-'$jName
 
 #Get basic script and set any parameters
@@ -37,16 +32,9 @@ for i in {1..10}; do
   echo "script submitted"
   nohup  wolfram -script  ../'r'$i'-elasticNet-crossVal-initialparameters.m' > $i'-'$jName.out 2>&1 &
   echo $c  $! >> $dir/save_pid.txt
-#  if (( $c % 3 == 0 )); then wait; fi
-  
-#  wait
-#  sleep 5m
 
+#  if (( $c % 3 == 0 )); then wait; fi
   cd $dir
 done
+
 echo "Finishing main loop" `date`
-
-#wait 
-#sleep 10m
-
-#echo "Finished"
